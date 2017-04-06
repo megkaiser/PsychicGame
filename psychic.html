@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+    <title>The Psychic Game</title>
+</head>
+<body>
+
+	<div id="game">
+
+    	<h1> Guess which letter I'm thinking of </h1>
+
+    	<p> 
+	
+		<ul>
+
+    		<li id="wins">Wins: 0</li> 
+    		<br>
+    		<li id="losses">Losses: 0</li> 
+    		<br>
+    		<li id="remaining">Remaining Guesses: 10</li>
+    		<br>
+    		<li id="completed">Guesses So Far: 0</li>
+
+    	</ul>
+
+    	</p>
+
+    	</div>
+
+    <script type="text/javascript">
+	    function renderGameState(wins, losses, remaining, completed) {
+	       	document.getElementById("wins").innerHTML = "Wins: " + wins;
+	        document.getElementById("losses").innerHTML = "Losses: " + losses;
+	        document.getElementById("remaining").innerHTML = "Remaining Guesses: " + remaining;	
+	        document.getElementById("completed").innerHTML = "Guesses So Far: " + completed;		  	
+	    }
+   		var options = ["a", "b", "c", "d", "e", "f", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+      	var wins = 0;
+      	var losses = 0;
+      	var remaining = 10;
+      	var completed = 0;
+
+      	var computerGuess = options[Math.floor(Math.random() * options.length)]; 
+
+      	document.onkeyup = function(event) {
+      		var userGuess = event.key;
+      		console.log(computerGuess);
+      		
+
+      	// if (options.indexOf(userGuess) > -1) {
+      	// 	if (options.indexOf(computerGuess) > -1) {
+      	// 		wins++, losses--, remaining--, completed++ 
+      	// 	}
+      	// }
+
+      		if(userGuess === computerGuess) {
+      			wins++;
+      			remaining = 10;
+      			completed = 0;
+      			computerGuess = options[Math.floor(Math.random() * options.length)]; 
+      		}
+      		else {
+      			remaining--;
+      			completed++;	
+      		}
+
+      		renderGameState(wins, losses, remaining, completed);
+
+      		if (remaining === 0) {
+      			losses++;
+      			remaining = 10;
+      			completed = 0;
+      			computerGuess = options[Math.floor(Math.random() * options.length)]; 
+      			renderGameState(wins, losses, remaining, completed);
+
+      		}
+
+      		// if (wins++) {
+      		// 	remaining = 10;
+      		// 	completed = 0;
+      		// 	renderGameState(wins, losses, remaining, completed);
+      		// }
+
+
+      	// console.log(wins);
+       // 	console.log(losses);
+       // 	console.log(remaining);
+       // 	console.log(completed);
+}
+
+
+    </script>
+
+</body>
+</html>
